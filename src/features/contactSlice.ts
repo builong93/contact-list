@@ -11,6 +11,7 @@ export interface Contact {
   name: string
   address: string
   phone: string
+  urlAvatar: string
 }
 interface ContactState {
   contacts: Contact[] // Sử dụng mảng Contact để lưu danh sách liên hệ
@@ -43,7 +44,7 @@ export const updateContactOnAPI = createAsyncThunk(
       const response = await axios.put(
         `https://64f938e94098a7f2fc142669.mockapi.io/api/contacts/listContacts/${updatedContact.id}`,
         updatedContact
-      )
+      ) 
       return response.data
     } catch (error) {
       throw error
@@ -65,6 +66,7 @@ export const addContactOnAPI = createAsyncThunk(
     }
   }
 )
+// Xóa 1 contact trong api
 export const deleteContactOnAPI = createAsyncThunk(
   "contact/deleteContactOnAPI",
   async (contactId: number) => {

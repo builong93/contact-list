@@ -19,6 +19,7 @@ export default function Add() {
     name: "",
     address: "",
     phone: "",
+    urlAvatar: ""
   })
   const dispatch = useDispatch<AppDispatch>()
 
@@ -34,6 +35,9 @@ export default function Add() {
     setOpen(false)
   }
   const handleAdd = () => {
+    if(!newContact.address || !newContact.name || !newContact.phone || !newContact.urlAvatar) {
+      return
+    }
     // Sử dụng dispatch với action creator để dispatch action
     dispatch(addContactOnAPI(newContact)).then((resultAction) => {
       if (addContactOnAPI.fulfilled.match(resultAction)) {
@@ -46,6 +50,7 @@ export default function Add() {
       name: "",
       address: "",
       phone: "",
+      urlAvatar: ""
     })
     setOpen(false)
   }
@@ -81,7 +86,7 @@ export default function Add() {
                 type='text'
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 onChange={handleInputChange}
                 value={newContact.address}
@@ -89,6 +94,16 @@ export default function Add() {
                 label='Address'
                 fullWidth
                 type='address'
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                onChange={handleInputChange}
+                value={newContact.urlAvatar}
+                name='urlAvatar'
+                label='urlAvatar'
+                fullWidth
+                type='text'
               />
             </Grid>
           </Grid>
